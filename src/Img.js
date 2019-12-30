@@ -11,7 +11,7 @@ class Img extends React.Component {
     widthCustom: undefined,
     height: randomSize(),
     width: randomSize(),
-    title: 'something here'
+    title: 'просто нажмите кнопку для случайного размера'
   };
   changeImage = () => {
     console.log(this.state);
@@ -50,7 +50,7 @@ class Img extends React.Component {
                   onError={this.returnError}
                   alt="something random"
                 />
-                <p>{this.props.text + ' ' + this.state.title}</p>
+                <p>{this.props.text}<br/>{this.state.title}</p>
                 {/* {this.props.children} */}
                 <input
                   type="number"

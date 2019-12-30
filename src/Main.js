@@ -4,7 +4,7 @@ import Img from './Img';
 class Main extends React.Component {
   state = {
     textT: [
-      { text: 'first img' },
+      { text: 'Введите свой размер или ' },
       { text: 'second img' },
       { text: 'third img' }
     ]

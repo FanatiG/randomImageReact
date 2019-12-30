@@ -3,27 +3,32 @@
   margin-right: 300px;
   margin-top: 100px;
   display: flex;
-  flex-flow: wrap;
   justify-content: space-evenly;
 }
 .grid-item {
-  background-color: rgba(144, 176, 235, 0);
-  border: 1px solid rgba(0, 0, 0, 0);
   padding: 0;
   font-size: 30px;
-  justify-content: center;
-  align-items: center;
-  vertical-align: top;
   background-color: #5488af;
-  transition: position 2s;
 }
 .grid-item-insides {
-  display: flex;
-  flex-flow: column;
+  display: block;
+  margin: auto;
+}
+.grid-item-insides {
+  p {
+    text-align: center;
+    font-size: 30px;
+  }
+  input {
+    width: 100%;
+    border: 0;
+  }
+  button {
+    width: 100%;
+    border: 0;
+  }
 }
 img {
-  max-width: 100%;
-  height: auto;
-  // margin: 50%;
-  // vertical-align: bottom;
+  display: block;
+  margin: auto;
 }
