@@ -1,0 +1,50 @@
+.item {
+  padding: 0;
+  font-size: 30px;
+  background-color: #4f4449;
+}
+
+.item-insides {
+  display: block;
+  position: relative;
+  margin: auto;
+}
+
+.item-insides p {
+  text-align: center;
+  font-size: 30px;
+}
+
+.item-insides input {
+  width: 100%;
+  border: 0;
+}
+
+.item-insides button {
+  width: 100%;
+  border: 0;
+}
+
+img {
+  display: block;
+  margin: auto;
+  max-height: 70vh;
+  max-width: 50vw;
+}
+
+.container {
+  margin-left: auto;
+}
+
+button {
+  background-color: #614b4c;
+  height: 25px;
+  font-size: 14pt;
+}
+
+input {
+  background-color: #614b4c;
+  text-align: center;
+  font-size: 12pt;
+}
+/*# sourceMappingURL=imageRender.css.map */

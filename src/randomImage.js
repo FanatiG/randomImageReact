@@ -1,5 +1,7 @@
 import React from 'react';
-import Img from './Img';
+import Img from './imageRender';
+import Sidebar from './sidebarRender';
+import './randomImage.css';
 
 class Main extends React.Component {
   state = {
@@ -18,6 +20,7 @@ class Main extends React.Component {
         <Img text={text[0].text}>
             {/* <p>hi</p> */}
         </Img>
+        <Sidebar></Sidebar>
       </div>
     );
   }
