@@ -43,6 +43,7 @@
 
 .slider-container {
   margin: 80px;
+  margin-right: 55px;
 }
 
 .slider {
@@ -55,6 +56,7 @@
   -webkit-transition: 0.2s;
   -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
+  position: static;
 }
 
 .slider:hover {
@@ -75,5 +77,32 @@
   height: 25px;
   background: #4f4449;
   cursor: pointer;
+}
+
+.input-cancel {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.cancel-button {
+  border: 3px solid #393637;
+  min-width: 25px;
+  min-height: 25px;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  opacity: 0.7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cancel-button:hover {
+  opacity: 1;
 }
 /*# sourceMappingURL=sidebarRender.css.map */

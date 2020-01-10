@@ -13,14 +13,29 @@ class Img extends React.Component {
       widthCustom: undefined,
       height: randomSize(),
       width: randomSize(),
-      title: 'просто нажмите кнопку для случайного размера'
+      title: 'нажмите кнопку "new image" для случайного размера',
+      basicValues: {
+        saturate: 100,
+        sepia: 0,
+        opacity: 100,
+        invert: 0,
+        hue: 0,
+        grayscale: 0,
+        contrast: 100,
+        brightness: 100,
+        blur: 0
+      }
     };
   }
   changeImage = () => {
-    console.log(this.state);
     this.setState({
       height: this.state.heightCustom || randomSize(100, 1000),
       width: this.state.widthCustom || randomSize(100, 1000)
+    });
+    Object.entries(this.state.basicValues).forEach(entry => {
+      let key = entry[0];
+      let value = entry[1];
+      this.props.applyFilter(key, value);
     });
   };
   receiveSize = event => {
@@ -28,7 +43,6 @@ class Img extends React.Component {
       [[event.target.placeholder].toString().toLowerCase() + 'Custom']:
         event.target.value || undefined
     });
-    console.log(this.state);
   };
   returnError = event => {
     this.onError = null;
@@ -36,11 +50,50 @@ class Img extends React.Component {
       'https://vignette.wikia.nocookie.net/fategrandorder/images/1/1d/Error404.png/revision/latest?cb=20170204102207';
   };
   render() {
+    let imageStyle = {
+      filter:
+        'saturate(' +
+        this.props.saturate +
+        '%)' +
+        ' ' +
+        'invert(' +
+        this.props.invert +
+        '%)' +
+        ' ' +
+        'sepia(' +
+        this.props.sepia +
+        '%)' +
+        ' ' +
+        'opacity(' +
+        this.props.opacity +
+        '%)' +
+        ' ' +
+        'hue-rotate(' +
+        this.props.hue +
+        'deg)' +
+        ' ' +
+        'grayscale(' +
+        this.props.grayscale +
+        '%)' +
+        ' ' +
+        'contrast(' +
+        this.props.contrast +
+        '%)' +
+        ' ' +
+        'brightness(' +
+        this.props.brightness +
+        '%)' +
+        ' ' +
+        'blur(' +
+        this.props.blur +
+        'px)'
+    };
     return (
       <div className="container">
         <div className="item">
           <div className="item-insides">
             <img
+              // TODO добавить все фильтры со стандартными значениями, получать через родителя из другого ребенка
               src={
                 'https://picsum.photos/' +
                 this.state.height +
@@ -49,6 +102,8 @@ class Img extends React.Component {
               }
               onError={this.returnError}
               alt="something random"
+              // style={{opacity: this.state.opacity/100}}
+              style={imageStyle}
             />
             <p>
               {this.props.text}
