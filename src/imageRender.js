@@ -24,7 +24,13 @@ class Img extends React.Component {
         contrast: 100,
         brightness: 100,
         blur: 0
-      }
+      },
+      urls: [
+        'https://picsum.photos/',
+        'http://lorempixel.com/',
+        'http://placeimg.com/',
+        'https://loremflickr.com/'
+      ]
     };
   }
   changeImage = () => {
@@ -44,12 +50,35 @@ class Img extends React.Component {
         event.target.value || undefined
     });
   };
+  // renderImage = () => {
+  // };
   returnError = event => {
     this.onError = null;
     event.target.src =
       'https://vignette.wikia.nocookie.net/fategrandorder/images/1/1d/Error404.png/revision/latest?cb=20170204102207';
   };
+
   render() {
+    // function renderImage(uno,des) {
+    //   console.log(this);
+    //   let http = new XMLHttpRequest();
+    //   let url =
+    //     'http://placeimg.com/' + uno + '/' + des;
+    //   http.open('HEAD', url, false);
+    //   http.send();
+    //   if (http.status === 200) {
+    //     console.log(url);
+    //     return url.toString();
+    //   }
+      // // 'https://picsum.photos/' +
+      // // 'http://lorempixel.com/' +
+      // 'http://placeimg.com/' +
+      // // 'https://loremflickr.com/' +
+      // this.state.height +
+      // '/' +
+      // this.state.width
+      // // this.renderImage
+    // }
     let imageStyle = {
       filter:
         'saturate(' +
@@ -95,10 +124,14 @@ class Img extends React.Component {
             <img
               // TODO добавить все фильтры со стандартными значениями, получать через родителя из другого ребенка
               src={
-                'https://picsum.photos/' +
+                // 'https://picsum.photos/' +
+                // 'http://lorempixel.com/' +
+                'http://placeimg.com/' +
+                // 'https://loremflickr.com/' +
                 this.state.height +
                 '/' +
                 this.state.width
+                // renderImage(this.state.height, this.state.width)
               }
               onError={this.returnError}
               alt="something random"

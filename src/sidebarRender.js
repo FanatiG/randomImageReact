@@ -5,223 +5,99 @@ import './sidebarRender.css';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: [
+        'saturate',
+        'sepia',
+        'opacity',
+        'invert',
+        'hue',
+        'grayscale',
+        'contrast',
+        'brightness',
+        'blur'
+      ],
+      min: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      max: [200, 100, 100, 100, 360, 100, 200, 200, 100],
+      basicValue: [100, 0, 100, 0, 0, 0, 100, 100, 0]
+    };
+  }
+  renderSlider() {
+    // this.state.name.forEach(()=>{
+    return (
+      <div className="sidebar-params">
+        <Slider
+          name={this.state.name[0]}
+          min={this.state.min[0]}
+          max={this.state.max[0]}
+          value={this.props.saturate}
+          basicValue={this.state.basicValue[0]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[1]}
+          min={this.state.min[1]}
+          max={this.state.max[1]}
+          value={this.props.sepia}
+          basicValue={this.state.basicValue[1]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[2]}
+          min={this.state.min[2]}
+          max={this.state.max[2]}
+          value={this.props.opacity}
+          basicValue={this.state.basicValue[2]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[3]}
+          min={this.state.min[3]}
+          max={this.state.max[3]}
+          value={this.props.invert}
+          basicValue={this.state.basicValue[3]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[4]}
+          min={this.state.min[4]}
+          max={this.state.max[4]}
+          value={this.props.hue}
+          basicValue={this.state.basicValue[4]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[5]}
+          min={this.state.min[5]}
+          max={this.state.max[5]}
+          value={this.props.grayscale}
+          basicValue={this.state.basicValue[5]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[6]}
+          min={this.state.min[6]}
+          max={this.state.max[6]}
+          value={this.props.contrast}
+          basicValue={this.state.basicValue[6]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[7]}
+          min={this.state.min[7]}
+          max={this.state.max[7]}
+          value={this.props.brightness}
+          basicValue={this.state.basicValue[7]}
+          applyFilter={this.props.applyFilter}></Slider>
+        <Slider
+          name={this.state.name[8]}
+          min={this.state.min[8]}
+          max={this.state.max[8]}
+          value={this.props.blur}
+          basicValue={this.state.basicValue[8]}
+          applyFilter={this.props.applyFilter}></Slider>
+      </div>
+    );
+    // })
   }
   render() {
     return (
       <div className="sidebar">
         <p className="sidebar-text">&#10809; more options &#10809;</p>
-        <div className="sidebar-params">
-          {/* ---------------------------------------------------------------------------------------- */}
-          <div className="slider-container">
-            <p>SATURATION</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={200}
-                readOnly={false}
-                value={this.props.saturate}
-                name="saturate"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('saturate', 100);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          {/* ---------------------------------------------------------------------------------------- */}
-          <div className="slider-container">
-            <p>SEPIA</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.sepia}
-                name="sepia"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('sepia', 0);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>OPACITY</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.opacity}
-                name="opacity"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('opacity', 100);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>INVERT</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.invert}
-                name="invert"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('invert', 0);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>HUE</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.hue}
-                name="hue"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('hut', 0);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>GRAYSCALE</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.grayscale}
-                name="grayscale"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('grayscale', 0);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>CONTRAST</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={200}
-                readOnly={false}
-                value={this.props.contrast}
-                name="contrast"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('contrast', 100);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>BRIGHTNESS</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={200}
-                readOnly={false}
-                value={this.props.brightness}
-                name="brightness"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('brightness', 100);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-          <div className="slider-container">
-            <p>BLUR</p>
-            <div className="input-cancel">
-              <input
-                min={0}
-                max={100}
-                readOnly={false}
-                value={this.props.blur}
-                name="blur"
-                className="slider"
-                type="range"
-                onChange={event => {
-                  this.props.applyFilter(event.target.name, event.target.value);
-                }}></input>
-              <button
-                className="cancel-button"
-                onClick={event => {
-                  this.props.applyFilter('blur', 0);
-                }}>
-                X
-              </button>
-            </div>
-          </div>
-        </div>
+        {this.renderSlider()}
       </div>
     );
   }

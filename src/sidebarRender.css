@@ -57,6 +57,7 @@
   -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
   position: static;
+  cursor: pointer;
 }
 
 .slider:hover {
@@ -69,7 +70,6 @@
   width: 25px;
   height: 25px;
   background: #4f4449;
-  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {

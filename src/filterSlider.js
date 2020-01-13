@@ -6,32 +6,34 @@ class Slider extends React.Component {
     this.state = {};
   }
   render() {
+    //   console.log(this.props);
     return (
-        <div className="slider-container">
-          <p>SATURATION</p>
-          <div className="input-cancel">
-            <input
-              min={0}
-              max={200}
-              readOnly={false}
-              value={this.props.saturate}
-              name="saturate"
-              className="slider"
-              type="range"
-              onChange={event => {
-                this.props.applyFilter(event.target.name, event.target.value);
-              }}></input>
-            <button
-              className="cancel-button"
-              onClick={event => {
-                this.props.applyFilter('saturate', 100);
-              }}>
-              X
-            </button>
-          </div>
-        </div>        
+      <div className="slider-container">
+        <p>{this.props.name.toUpperCase() + ' (' + this.props.value + ')'}</p>
+        <div className="input-cancel">
+          <input
+            min={this.props.min}
+            max={this.props.max}
+            readOnly={false}
+            value={this.props.value}
+            name={this.props.name}
+            className="slider"
+            type="range"
+            onChange={event => {
+              console.log(this.props);
+              this.props.applyFilter(event.target.name, event.target.value);
+            }}></input>
+          <button
+            className="cancel-button"
+            onClick={() => {
+              this.props.applyFilter(this.props.name, this.props.basicValue);
+            }}>
+            X
+          </button>
+        </div>
+      </div>
     );
-}
+  }
 }
 
 export default Slider;
