@@ -1,6 +1,5 @@
 .item {
   padding: 0;
-  font-size: 30px;
   background-color: #4f4449;
 }
 
@@ -25,6 +24,18 @@
   border: 0;
 }
 
+.item-insides input, .item-insides button {
+  margin-top: 10px;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.item-insides input:hover, .item-insides button:hover {
+  opacity: 1;
+}
+
 img {
   display: block;
   margin: auto;
@@ -39,7 +50,6 @@ img {
 button {
   background-color: #614b4c;
   height: 25px;
-  font-size: 14pt;
 }
 
 input {

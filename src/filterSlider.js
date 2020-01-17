@@ -6,7 +6,6 @@ class Slider extends React.Component {
     this.state = {};
   }
   render() {
-    //   console.log(this.props);
     return (
       <div className="slider-container">
         <p>{this.props.name.toUpperCase() + ' (' + this.props.value + ')'}</p>
@@ -20,13 +19,13 @@ class Slider extends React.Component {
             className="slider"
             type="range"
             onChange={event => {
-              console.log(this.props);
               this.props.applyFilter(event.target.name, event.target.value);
             }}></input>
           <button
+            title="Reset"
             className="cancel-button"
             onClick={() => {
-              this.props.applyFilter(this.props.name, this.props.basicValue);
+              this.props.resetFilter(this.props.name, this.props.value);
             }}>
             X
           </button>

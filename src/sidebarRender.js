@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from './filterSlider';
-import './sidebarRender.css';
+import './styles/sidebarRender.css';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -17,81 +17,65 @@ class Sidebar extends React.Component {
         'brightness',
         'blur'
       ],
-      min: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      max: [200, 100, 100, 100, 360, 100, 200, 200, 100],
-      basicValue: [100, 0, 100, 0, 0, 0, 100, 100, 0]
+      min: {
+        saturate: 0,
+        sepia: 0,
+        opacity: 0,
+        invert: 0,
+        hue: 0,
+        grayscale: 0,
+        contrast: 0,
+        brightness: 0,
+        blur: 0
+      },
+      max: {
+        saturate: 200,
+        sepia: 100,
+        opacity: 100,
+        invert: 100,
+        hue: 360,
+        grayscale: 100,
+        contrast: 200,
+        brightness: 200,
+        blur: 100
+      },
+      basicValue: {
+        saturate: 100,
+        sepia: 0,
+        opacity: 100,
+        invert: 0,
+        hue: 0,
+        grayscale: 0,
+        contrast: 100,
+        brightness: 100,
+        blur: 0
+      }
     };
   }
   renderSlider() {
-    // this.state.name.forEach(()=>{
+    const renderSliders = this.state.name.map(sliderName => (
+      <Slider
+        key={sliderName}
+        name={sliderName}
+        min={this.state.min[sliderName]}
+        max={this.state.max[sliderName]}
+        value={this.props[sliderName]}
+        basicValue={this.state.basicValue[sliderName]}
+        applyFilter={this.props.applyFilter}
+        resetFilter={this.props.resetFilter}></Slider>
+    ));
     return (
       <div className="sidebar-params">
-        <Slider
-          name={this.state.name[0]}
-          min={this.state.min[0]}
-          max={this.state.max[0]}
-          value={this.props.saturate}
-          basicValue={this.state.basicValue[0]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[1]}
-          min={this.state.min[1]}
-          max={this.state.max[1]}
-          value={this.props.sepia}
-          basicValue={this.state.basicValue[1]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[2]}
-          min={this.state.min[2]}
-          max={this.state.max[2]}
-          value={this.props.opacity}
-          basicValue={this.state.basicValue[2]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[3]}
-          min={this.state.min[3]}
-          max={this.state.max[3]}
-          value={this.props.invert}
-          basicValue={this.state.basicValue[3]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[4]}
-          min={this.state.min[4]}
-          max={this.state.max[4]}
-          value={this.props.hue}
-          basicValue={this.state.basicValue[4]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[5]}
-          min={this.state.min[5]}
-          max={this.state.max[5]}
-          value={this.props.grayscale}
-          basicValue={this.state.basicValue[5]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[6]}
-          min={this.state.min[6]}
-          max={this.state.max[6]}
-          value={this.props.contrast}
-          basicValue={this.state.basicValue[6]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[7]}
-          min={this.state.min[7]}
-          max={this.state.max[7]}
-          value={this.props.brightness}
-          basicValue={this.state.basicValue[7]}
-          applyFilter={this.props.applyFilter}></Slider>
-        <Slider
-          name={this.state.name[8]}
-          min={this.state.min[8]}
-          max={this.state.max[8]}
-          value={this.props.blur}
-          basicValue={this.state.basicValue[8]}
-          applyFilter={this.props.applyFilter}></Slider>
+        <button
+          className="reset-all-filters"
+          onClick={() => {
+            this.props.resetFilers();
+          }}>
+          reset all filters
+        </button>
+        {renderSliders}
       </div>
     );
-    // })
   }
   render() {
     return (

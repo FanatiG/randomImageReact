@@ -1,5 +1,5 @@
 import React from 'react';
-import './imageRender.css';
+import './styles/imageRender.css';
 function randomSize(min, max) {
   let minVal = min || 200;
   let maxVal = max || 500;
@@ -9,6 +9,7 @@ class Img extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      imageUrl: '',
       heightCustom: undefined,
       widthCustom: undefined,
       height: randomSize(),
@@ -33,8 +34,11 @@ class Img extends React.Component {
       ]
     };
   }
-  changeImage = () => {
-    this.setState({
+  componentDidMount() {
+    this.renderImage();
+  }
+  changeImage = async () => {
+    await this.setState({
       height: this.state.heightCustom || randomSize(100, 1000),
       width: this.state.widthCustom || randomSize(100, 1000)
     });
@@ -43,42 +47,42 @@ class Img extends React.Component {
       let value = entry[1];
       this.props.applyFilter(key, value);
     });
+    this.renderImage();
   };
   receiveSize = event => {
     this.setState({
-      [[event.target.placeholder].toString().toLowerCase() + 'Custom']:
-        event.target.value || undefined
+      [[event.target.name] + 'Custom']: event.target.value || undefined
     });
   };
-  // renderImage = () => {
-  // };
-  returnError = event => {
-    this.onError = null;
-    event.target.src =
-      'https://vignette.wikia.nocookie.net/fategrandorder/images/1/1d/Error404.png/revision/latest?cb=20170204102207';
+  renderImage = async () => {
+    this.setState({
+      imageUrl:
+        'https://jamescunion97.files.wordpress.com/2015/03/giphy.gif'
+    });
+    const fetchImageUrl = await fetch(
+      'https://source.unsplash.com/' +
+        this.state.width +
+        'x' +
+        this.state.height
+    ).then(response => response);
+    if (fetchImageUrl.ok && this.state.height && this.state.width) {
+      this.setState({
+        imageUrl: fetchImageUrl.url
+      });
+    } else {
+      this.setState({
+        imageUrl:
+          'https://vignette.wikia.nocookie.net/fategrandorder/images/1/1d/Error404.png/revision/latest?cb=20170204102207'
+      });
+    }
   };
-
+  getImg = () => {
+    return this.state.imageUrl;
+  };
+  renderErrorImg = (event) => {
+    event.target.src = 'https://jamescunion97.files.wordpress.com/2015/03/giphy.gif';
+  }
   render() {
-    // function renderImage(uno,des) {
-    //   console.log(this);
-    //   let http = new XMLHttpRequest();
-    //   let url =
-    //     'http://placeimg.com/' + uno + '/' + des;
-    //   http.open('HEAD', url, false);
-    //   http.send();
-    //   if (http.status === 200) {
-    //     console.log(url);
-    //     return url.toString();
-    //   }
-      // // 'https://picsum.photos/' +
-      // // 'http://lorempixel.com/' +
-      // 'http://placeimg.com/' +
-      // // 'https://loremflickr.com/' +
-      // this.state.height +
-      // '/' +
-      // this.state.width
-      // // this.renderImage
-    // }
     let imageStyle = {
       filter:
         'saturate(' +
@@ -122,22 +126,13 @@ class Img extends React.Component {
         <div className="item">
           <div className="item-insides">
             <img
-              // TODO добавить все фильтры со стандартными значениями, получать через родителя из другого ребенка
-              src={
-                // 'https://picsum.photos/' +
-                // 'http://lorempixel.com/' +
-                'http://placeimg.com/' +
-                // 'https://loremflickr.com/' +
-                this.state.height +
-                '/' +
-                this.state.width
-                // renderImage(this.state.height, this.state.width)
-              }
-              onError={this.returnError}
+            id="scream"
+              src={this.state.imageUrl}
               alt="something random"
-              // style={{opacity: this.state.opacity/100}}
               style={imageStyle}
+              onError={this.renderErrorImg}
             />
+            <canvas width={this.state.width} height={this.state.height} id="myCanvas"></canvas>
             <p>
               {this.props.text}
               <br />
@@ -145,6 +140,7 @@ class Img extends React.Component {
             </p>
             {/* {this.props.children} */}
             <input
+              name="height"
               type="number"
               min="100"
               max="10000"
@@ -152,6 +148,7 @@ class Img extends React.Component {
               onChange={this.receiveSize}
             />
             <input
+              name="width"
               type="number"
               min="100"
               max="10000"
